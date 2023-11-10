@@ -1,0 +1,66 @@
+cve : https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=bluetooth
+=> keyword를 기준으로 검색
+https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword={search}
+
+파파고검색 : https://papago.naver.com/?sk=en&tk=ko&hn=1&st=ShowMojo%20MojoBox%20Digital%20Lockbox%201.4%20is%20vulnerable%20to%20Authentication%20Bypass.%20The%20implementation%20of%20the%20lock%20opening%20mechanism%20via%20Bluetooth%20Low%20Energy%20(BLE)%20is%20vulnerable%20to%20replay%20attacks.%20A%20maliciou
+https://papago.naver.com/
+?sk=en&tk=ko&hn=1
+&st=ShowMojo%20MojoBox%20Digital%20Lockbox%201.4%20is%20vulnerable%20to%20Authentication%20Bypass.%20The%20implementation%20of%20the%20lock%20opening%20mechanism%20via%20Bluetooth%20Low%20Energy%20(BLE)%20is%20vulnerable%20to%20replay%20attacks.%20A%20maliciou
+=> en -> ko방향 번역
+st : 번역할 내용
+공백이 %20으로 아스키코드로 번역해서 들어감(replace로 대체)
+
+https://papago.naver.com/?sk=en&tk=ko&hn=1&st={input_content}
+=> input_content에 번역하기 원하기 값을 넣어서 돌리기 
+
+(긴값을 넣어서도 잘 보이게 할 수 있을까?)
+
+===
+
+리스트 구조 : [CVE번호,한글,영어]
+
+표 출력 방법 : 
+<참고 : https://cosmosproject.tistory.com/395>
+=> 어떻게든 깨지기 때문에 이쁘게 출력하지 말고 csv파일
+=> csv줄바꿈문자 넣을때 방법
+<https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=paulj2000&logNo=220885784446>
+
+===
+
+다음에 할꺼 => csv 줄바꿈 문자를 넣을때 넣을 수 있는거 test
+
+(리포트 타입)
+1. csv(.csv)
+=> ,로 구분되어 excel로 볼 수 있음(단 2,3번째의 칸 길이 조절 필요)
+2. line(.txt)
+=> CVE-2023-????|한글내용|영어내용 으로 one line으로 구분되어있음
+3. report(.txt)
+=> 
+keyword : ????? / Total : ?????
+
+CVE-2023-????
+한글내용
+<
+영어내용
+>
+
+=> 쭉 이런 내용이 문단별로 나뉘어서 기록되어있음
+
+===
+(알고리즘 순서)
+1. keyword 입력 -> 아래와 같은 형식으로 search
+<https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword={search}>
+
+2. 검색된 CVE의 모든 내용을 가져와서 지정한 double list에 기록되어있음
+3. 이후 기록된 CVE영어 내용을 파파고에 넣어서 번역 -> 번역 내용 크롤링하여 저장
+4. 지정한 report type에 따라 기록
+<제목형식 : 날짜시간_report_{keyword}.csv(txt)> - default : csv
+
+===
+memo : https://nvd.nist.gov/vuln/detail/CVE-2023-21661
+지정한 단어 번역 우회기능 추가
+밀리는 버그 수정 필요 : CVE-2021-35117부분
+개선할 부분 : 스크랩핑이 완료했을떄 전체 갯수 표시
+지금 구글 번역부분에서 자원을 많이 잡아먹음 
+-> 따라서 그런 원인을 찾아서 해결하는데
+ex) 10개씩 끊어서 번역을 한 후 구글 삭제후 다시 생성하여 번역을 하는 방식
